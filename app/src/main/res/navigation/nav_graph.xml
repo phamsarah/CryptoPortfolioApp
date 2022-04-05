@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loadingSpinnerFragment">
+
+    <fragment
+        android:id="@+id/loadingSpinnerFragment"
+        android:name="com.example.sarahsapp.fragments.LoadingSpinnerFragment"
+        android:label="fragment_loading_spinner"
+        tools:layout="@layout/fragment_loading_spinner" >
+        <action
+            android:id="@+id/action_loadingSpinnerFragment_to_portfolioFragment"
+            app:destination="@id/portfolioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="com.example.sarahsapp.fragments.PortfolioFragment"
+        android:label="fragment_portfolio"
+        tools:layout="@layout/fragment_portfolio" />
+    <fragment
+        android:id="@+id/portfolioListsFragment"
+        android:name="com.example.sarahsapp.fragments.PortfolioListsFragment"
+        android:label="portfolio_lists_fragment"
+        tools:layout="@layout/portfolio_lists_fragment" />
+</navigation>

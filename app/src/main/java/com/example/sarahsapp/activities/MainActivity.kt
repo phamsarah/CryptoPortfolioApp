@@ -1,53 +1,45 @@
 package com.example.sarahsapp.activities
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.sarahsapp.R
-import com.example.sarahsapp.databinding.ActivityMainTempBinding
-import com.example.sarahsapp.ui.viewmodels.MainViewModel
 import com.example.sarahsapp.ui.viewmodels.Student
 import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var splashScreenImage: ImageView
-    private val splashTime = 3000L
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//
-//        val student = get<Student>()
-//        student.beSmart()
-//
-//        val student2 = get<Student>()
-//        student2.beSmart()
-//
-//        splashScreenImage = findViewById(R.id.moneySarah)
-//
-//        animateMoneySarah()
+        setContentView(R.layout.activity_main)
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+
+        navController = navHostFragment.navController
+
+        // Dependency Injection
+
+        val student = get<Student>()
+        student.beSmart()
+
+        val student2 = get<Student>()
+        student2.beSmart()
 
 //        val viewModel = getViewModel<MainViewModel>()
 //        viewModel.performAction()
 
+        // TODO: only if we want a actionbar
+        //setupActionBarWithNavController(navController)
 
-
-        // TODO: calling CoinbaseProFragment
-        val binding: ActivityMainTempBinding = ActivityMainTempBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
     }
 
-    private fun animateMoneySarah(){
-        val rotate = AnimationUtils.loadAnimation(this, R.anim.rotate_animation)
-        splashScreenImage.animation = rotate
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+
 }

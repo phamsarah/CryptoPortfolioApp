@@ -1,13 +1,12 @@
 package com.example.sarahsapp.fragments
 
-
 import android.os.Bundle
 import android.util.Base64
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sarahsapp.BuildConfig
@@ -15,8 +14,7 @@ import com.example.sarahsapp.activities.MainActivity
 import com.example.sarahsapp.data.model.Account
 import com.example.sarahsapp.data.request.RequestBuilder
 import com.example.sarahsapp.data.request.RequestHeader
-import com.example.sarahsapp.databinding.AccountFragmentBinding
-import com.example.sarahsapp.databinding.AccountListBinding
+import com.example.sarahsapp.databinding.FragmentPortfolioBinding
 import com.example.sarahsapp.ui.adapters.AccountRecyclerViewAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,26 +22,18 @@ import retrofit2.Response
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class CoinbaseProFragment: Fragment() {
-    companion object {
-        const val secret = BuildConfig.secret
-        const val accessKey = BuildConfig.key
-        const val accessPassphrase = BuildConfig.passPhrase
-
-        // What type of API call we are making
-        const val accessType = "GET"
-
-        // We are retrieving User accounts
-        const val accessPath = "/accounts"
-    }
-
-    private var _binding: AccountListBinding? = null
+class PortfolioFragment : Fragment() {
+    private var _binding: FragmentPortfolioBinding? = null
 
     // Valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = AccountListBinding.inflate(inflater,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // TODO: this might be a problem later
+        _binding = FragmentPortfolioBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -81,11 +71,11 @@ class CoinbaseProFragment: Fragment() {
             accessPassphrase,
             accessSign,
             accessTimeStamp
-         )
+        )
     }
 
-    private fun makeNetworkCall( networkCallRequest : Call<List<Account>>, mainActivity: MainActivity, recyclerView: RecyclerView){
-        networkCallRequest.enqueue(object : Callback<List<Account>>{
+    private fun makeNetworkCall(networkCallRequest : Call<List<Account>>, mainActivity: MainActivity, recyclerView: RecyclerView){
+        networkCallRequest.enqueue(object : Callback<List<Account>> {
             override fun onResponse(call: Call<List<Account>>, response: Response<List<Account>>) {
                 if(response.isSuccessful){
                     val accountList: List<Account>? = response.body()
@@ -105,4 +95,15 @@ class CoinbaseProFragment: Fragment() {
         })
     }
 
+    companion object {
+        const val secret = BuildConfig.secret
+        const val accessKey = BuildConfig.key
+        const val accessPassphrase = BuildConfig.passPhrase
+
+        // What type of API call we are making
+        const val accessType = "GET"
+
+        // We are retrieving User accounts
+        const val accessPath = "/accounts"
+    }
 }

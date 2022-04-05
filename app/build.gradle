@@ -32,11 +32,13 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerVersion "1.5.10"
+        kotlinCompilerExtensionVersion = "1.0.0-beta08"
     }
 
     buildFeatures {
         viewBinding true
+        compose true
     }
 
     packagingOptions {
@@ -70,6 +72,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -83,9 +89,26 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
+
+    // Navigation - Jetpack compose
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.4.1"
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.1.1'
+    // Animations
+    implementation 'androidx.compose.animation:animation:1.1.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.1.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
+
+    implementation "androidx.compose.compiler:compiler:1.2.0-alpha06"
 
 }
