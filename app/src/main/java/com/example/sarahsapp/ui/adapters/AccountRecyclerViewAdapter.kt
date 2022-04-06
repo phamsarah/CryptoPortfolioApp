@@ -21,8 +21,7 @@ class AccountRecyclerViewAdapter ( private val mainActivity: MainActivity, priva
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: AccountFragmentBinding) :
-            RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(binding: AccountFragmentBinding) : RecyclerView.ViewHolder(binding.root){
                 val currencyView: TextView = binding.accountCurrency
                 val balanceView: TextView = binding.accountBalance
                 val tradingEnabledView: TextView = binding.tradingEnabled

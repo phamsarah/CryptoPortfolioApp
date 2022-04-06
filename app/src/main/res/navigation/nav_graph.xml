@@ -11,17 +11,29 @@
         android:label="fragment_loading_spinner"
         tools:layout="@layout/fragment_loading_spinner" >
         <action
-            android:id="@+id/action_loadingSpinnerFragment_to_portfolioFragment"
-            app:destination="@id/portfolioFragment" />
+            android:id="@+id/action_loadingSpinnerFragment_to_serviceListsFragment"
+            app:destination="@id/serviceListsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/portfolioFragment"
-        android:name="com.example.sarahsapp.fragments.PortfolioFragment"
+        android:id="@+id/coinbaseProFragment"
+        android:name="com.example.sarahsapp.fragments.CoinbaseProFragment"
         android:label="fragment_portfolio"
         tools:layout="@layout/fragment_portfolio" />
     <fragment
-        android:id="@+id/portfolioListsFragment"
-        android:name="com.example.sarahsapp.fragments.PortfolioListsFragment"
-        android:label="portfolio_lists_fragment"
-        tools:layout="@layout/portfolio_lists_fragment" />
+        android:id="@+id/serviceListsFragment"
+        android:name="com.example.sarahsapp.fragments.ServiceListsFragment"
+        android:label="service_lists_fragment"
+        tools:layout="@layout/service_lists_fragment" >
+        <action
+            android:id="@+id/action_serviceListsFragment_to_CoinbaseProFragment"
+            app:destination="@id/coinbaseProFragment" />
+        <action
+            android:id="@+id/action_serviceListsFragment_to_coinbaseFragment"
+            app:destination="@id/coinbaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coinbaseFragment"
+        android:name="com.example.sarahsapp.fragments.CoinbaseFragment"
+        android:label="coinbase_fragment"
+        tools:layout="@layout/coinbase_fragment" />
 </navigation>

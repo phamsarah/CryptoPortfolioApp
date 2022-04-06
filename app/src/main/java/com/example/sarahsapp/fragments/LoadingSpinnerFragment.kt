@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.sarahsapp.R
 
@@ -20,8 +21,9 @@ class LoadingSpinnerFragment : Fragment() {
         splashScreenImage = view.findViewById(R.id.moneySarah)
         animateMoneySarah()
         splashScreenImage.setOnClickListener {
-            // TODO: calling CoinbaseProFragment
-            findNavController().navigate(R.id.action_loadingSpinnerFragment_to_portfolioFragment)
+//            findNavController().navigate(R.id.action_loadingSpinnerFragment_to_serviceListsFragment)
+            val action = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToServiceListsFragment()
+            view.findNavController().navigate(action)
         }
 
         return view

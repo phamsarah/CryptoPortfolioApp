@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -32,13 +33,16 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion "1.5.10"
-        kotlinCompilerExtensionVersion = "1.0.0-beta08"
+        kotlinCompilerExtensionVersion compose_version
     }
 
     buildFeatures {
         viewBinding true
         compose true
+    }
+
+    dataBinding {
+        enabled true
     }
 
     packagingOptions {
@@ -101,7 +105,8 @@ dependencies {
     // Integration with activities
     implementation 'androidx.activity:activity-compose:1.4.0'
     // Compose Material Design
-    implementation 'androidx.compose.material:material:1.1.1'
+    //implementation 'androidx.compose.material:material:1.1.1'
+    implementation("androidx.compose.material3:material3:1.0.0-alpha08")
     // Animations
     implementation 'androidx.compose.animation:animation:1.1.1'
     // Tooling support (Previews, etc.)
@@ -109,6 +114,7 @@ dependencies {
     // Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
 
-    implementation "androidx.compose.compiler:compiler:1.2.0-alpha06"
+    implementation "androidx.compose.compiler:compiler:$compose_version"
+
 
 }

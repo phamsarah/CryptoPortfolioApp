@@ -22,16 +22,13 @@ import retrofit2.Response
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class PortfolioFragment : Fragment() {
+class CoinbaseProFragment : Fragment() {
     private var _binding: FragmentPortfolioBinding? = null
 
     // Valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // TODO: this might be a problem later
         _binding = FragmentPortfolioBinding.inflate(inflater,container,false)
         return binding.root

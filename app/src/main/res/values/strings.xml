@@ -4,4 +4,11 @@
     <string name="not_tradable">Not Tradable</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Service Names-->
+    <string name="coinbase_pro">Coinbase Pro</string>
+    <string name="coinbase">Coinbase</string>
+    <string name="nicehash">Nicehash</string>
+    <string name="robinhood">Robinhood</string>
+
 </resources>
