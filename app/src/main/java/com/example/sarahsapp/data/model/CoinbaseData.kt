@@ -2,7 +2,7 @@ package com.example.sarahsapp.data.model
 
 import java.util.*
 
-data class CoinbaseAccount(
+data class CoinbaseData(
     val pagination: Pagination,
     val data: List<Data>
 )

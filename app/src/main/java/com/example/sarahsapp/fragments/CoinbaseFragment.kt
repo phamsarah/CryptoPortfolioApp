@@ -25,7 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-typealias OnCoinbaseDataSuccess = (CoinbaseAccount?) -> Unit
+typealias OnCoinbaseDataSuccess = (CoinbaseData?) -> Unit
 
 class CoinbaseFragment : Fragment(){
     private var _binding: ExchangeDetailsCardBinding? = null
@@ -37,7 +37,7 @@ class CoinbaseFragment : Fragment(){
         super.onCreate(savedInstanceState)
 
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.fragment
+            drawingViewId = R.id.nav_host_fragment
             duration = resources.getInteger(R.integer.open_exchange_details_transition_duration).toLong()
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(requireContext().themeColor(com.google.android.material.R.attr.colorSurface))
@@ -60,6 +60,7 @@ class CoinbaseFragment : Fragment(){
                 val values: List<Data> = coinbaseResponse.data.filter { s -> s.balance.amount.toFloat() > 0.00 }
                 val currencyList = values.map { it.balance.toCurrencyData() }
 
+                // todo: Fragment CoinbaseFragment not attached to a context, requireContext. invoke()
                 binding.currencyRecyclerview.layoutManager = GridLayoutManager(requireContext(),1)
                 binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
                 binding.exchangeImage.setImageResource(R.drawable.coinbase)
@@ -84,7 +85,7 @@ class CoinbaseFragment : Fragment(){
         balance = amount
     )
 
-    private fun createAPINetworkCall(): Call<CoinbaseAccount> {
+    private fun createAPINetworkCall(): Call<CoinbaseData> {
 
         // Time stamp, creates a unique signature before calling, where security comes in handy
         val accessTimeStamp = "" + System.currentTimeMillis() / 1000L
@@ -107,16 +108,16 @@ class CoinbaseFragment : Fragment(){
         return destinationService.getCoinbaseHeaders(accessKey, accessSign, accessTimeStamp)
     }
 
-    private fun makeNetworkCall(networkCallRequest : Call<CoinbaseAccount>, onSuccess: OnCoinbaseDataSuccess){
-        networkCallRequest.enqueue(object : Callback<CoinbaseAccount> {
-            override fun onResponse(call: Call<CoinbaseAccount>, response: Response<CoinbaseAccount>){
+    private fun makeNetworkCall(networkCallRequest : Call<CoinbaseData>, onSuccess: OnCoinbaseDataSuccess){
+        networkCallRequest.enqueue(object : Callback<CoinbaseData> {
+            override fun onResponse(call: Call<CoinbaseData>, response: Response<CoinbaseData>){
                 if(response.isSuccessful){
-                    val coinbaseData: CoinbaseAccount? = response.body()
+                    val coinbaseData: CoinbaseData? = response.body()
                     onSuccess.invoke(coinbaseData)
                 }
             }
 
-            override fun onFailure(call: Call<CoinbaseAccount>, t: Throwable) {
+            override fun onFailure(call: Call<CoinbaseData>, t: Throwable) {
                 Toast.makeText(context, "Something went wrong $t $call", Toast.LENGTH_SHORT).show()
             }
         })

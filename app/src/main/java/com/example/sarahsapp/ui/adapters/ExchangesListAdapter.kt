@@ -2,25 +2,29 @@ package com.example.sarahsapp.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sarahsapp.R
 import com.example.sarahsapp.data.model.Exchange
 import com.example.sarahsapp.databinding.ExchangesItemLayoutBinding
-import com.example.sarahsapp.fragments.ExchangesListsFragmentDirections
 import com.example.sarahsapp.ui.utils.themeStyle
 import com.google.android.material.R.attr.*
-import com.google.android.material.card.MaterialCardView
 
 
-class ExchangesListAdapter: RecyclerView.Adapter<ExchangesListAdapter.ViewHolder>() {
+class ExchangesListAdapter(private val listener: ExchangesItemListener): RecyclerView.Adapter<ExchangesListAdapter.ViewHolder>() {
+
+    interface ExchangesItemListener{
+        fun onExchangeClicked(cardView: View, position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ExchangesItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false), parent)
+        return ViewHolder(
+            ExchangesItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            parent,
+            listener
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,15 +32,27 @@ class ExchangesListAdapter: RecyclerView.Adapter<ExchangesListAdapter.ViewHolder
         holder.bind(exchange, position)
     }
 
-    inner class ViewHolder(binding: ExchangesItemLayoutBinding, private val view: ViewGroup) : RecyclerView.ViewHolder(binding.root){
-        private val nameView: TextView = binding.name
-        private val imageView: ImageView = binding.image
-        private val exchangeItem: MaterialCardView = binding.cardView
+    inner class ViewHolder(
+        private val binding: ExchangesItemLayoutBinding,
+        private val view: ViewGroup,
+        listener: ExchangesItemListener
+    ) : RecyclerView.ViewHolder(binding.root){
+
+        private val nameView: TextView = binding.exchangeName
+        private val imageView: ImageView = binding.exchangeImage
+
+        init{
+            binding.run {
+                this.listener = listener
+            }
+        }
 
         @SuppressLint("NewApi")
         fun bind(exchange: Exchange, position: Int){
             nameView.text = view.context.getString(exchange.name)
             imageView.setImageResource(exchange.image)
+
+            binding.position = position
 
             val textAppearance = nameView.context.themeStyle(
                 textAppearanceHeadline5
@@ -45,23 +61,7 @@ class ExchangesListAdapter: RecyclerView.Adapter<ExchangesListAdapter.ViewHolder
                 textAppearance
             )
 
-            exchangeItem.setOnClickListener {
-                when(position) {
-                    0 -> {
-                        val exchangeItemCardTransition = view.context.getString(R.string.exchange_item_card_transition)
-                        val extras = FragmentNavigatorExtras(exchangeItem to exchangeItemCardTransition)
-                        val directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToCoinbaseProFragment()
-                        view.findNavController().navigate(directions, extras)
-                    }
-                    // TODO: Apply transition here too
-                    // TODO: backbutton
-                    1 -> {
-                        val action = ExchangesListsFragmentDirections.actionExchangesListsFragmentToCoinbaseFragment()
-                        view.findNavController().navigate(action)
-                    }
-
-                }
-            }
+            binding.executePendingBindings()
         }
     }
 

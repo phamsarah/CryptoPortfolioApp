@@ -2,24 +2,28 @@ package com.example.sarahsapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.sarahsapp.R
+import com.example.sarahsapp.databinding.ActivityMainBinding
+import com.example.sarahsapp.ui.utils.contentView
 import com.example.sarahsapp.ui.viewmodels.Student
 import org.koin.android.ext.android.get
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    private val binding: ActivityMainBinding by contentView(R.layout.activity_main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fragment) as NavHostFragment
 
-        navController = navHostFragment.navController
+        binding.run {
+            findNavController(R.id.nav_host_fragment)
+        }
 
         // Dependency Injection
 
@@ -32,14 +36,6 @@ class MainActivity : AppCompatActivity() {
 //        val viewModel = getViewModel<MainViewModel>()
 //        viewModel.performAction()
 
-        // TODO: only if we want a actionbar
-        //setupActionBarWithNavController(navController)
-
     }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
 
 }

@@ -1,6 +1,6 @@
 package com.example.sarahsapp.data.request
 
-import com.example.sarahsapp.data.model.CoinbaseAccount
+import com.example.sarahsapp.data.model.CoinbaseData
 import com.example.sarahsapp.data.model.CoinbaseProData
 import retrofit2.Call
 import retrofit2.http.GET
@@ -20,5 +20,5 @@ interface RequestHeader {
         @Header("CB-ACCESS-KEY") accessKey: String,
         @Header("CB-ACCESS-SIGN") accessSign: String,
         @Header("CB-ACCESS-TIMESTAMP") accessTimestamp: String
-    ): Call<CoinbaseAccount>
+    ): Call<CoinbaseData>
 }

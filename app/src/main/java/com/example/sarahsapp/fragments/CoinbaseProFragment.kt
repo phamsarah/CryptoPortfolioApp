@@ -1,5 +1,6 @@
 package com.example.sarahsapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
 import androidx.fragment.app.Fragment
@@ -11,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sarahsapp.BuildConfig
 import com.example.sarahsapp.R
 import com.example.sarahsapp.data.model.CoinbaseProData
@@ -20,6 +20,8 @@ import com.example.sarahsapp.data.request.RequestBuilder
 import com.example.sarahsapp.data.request.RequestHeader
 import com.example.sarahsapp.databinding.ExchangeDetailsCardBinding
 import com.example.sarahsapp.ui.adapters.CurrencyRecyclerViewAdapter
+import com.example.sarahsapp.ui.utils.themeColor
+import com.google.android.material.transition.MaterialContainerTransform
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +34,17 @@ class CoinbaseProFragment : Fragment() {
 
     // Valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            duration = resources.getInteger(R.integer.open_exchange_details_transition_duration).toLong()
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().themeColor(com.google.android.material.R.attr.colorSurface))
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = ExchangeDetailsCardBinding.inflate(inflater,container,false)
