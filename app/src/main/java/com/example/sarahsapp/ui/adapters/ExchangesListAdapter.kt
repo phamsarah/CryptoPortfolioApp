@@ -65,6 +65,6 @@ class ExchangesListAdapter(private val listener: ExchangesItemListener): Recycle
         }
     }
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 3
 
 }

@@ -3,7 +3,7 @@ package com.example.sarahsapp.data.model
 import com.example.sarahsapp.R
 
 /**
- *  Exchange: Coinbase Pro, Coinbase, NiceHash, or Robinhood
+ *  Exchange: Coinbase Pro, Coinbase, NiceHash
  *  Each service has a portfolio for the user to views
  */
 class Exchange(position: Int) {
@@ -21,10 +21,6 @@ class Exchange(position: Int) {
                 image = R.drawable.coinbase
             }
             2 -> {
-                name = R.string.robinhood
-                image = R.drawable.robinhood
-            }
-            3 -> {
                 name = R.string.nicehash
                 image = R.drawable.nicehash
             }
