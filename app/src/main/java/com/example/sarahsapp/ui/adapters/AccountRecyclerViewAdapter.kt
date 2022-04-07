@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sarahsapp.R
 import com.example.sarahsapp.activities.MainActivity
-import com.example.sarahsapp.data.model.Account
-import com.example.sarahsapp.databinding.AccountFragmentBinding
+import com.example.sarahsapp.data.model.CoinbaseProData
+import com.example.sarahsapp.databinding.ExchangeDetailsCardBinding
 
-class AccountRecyclerViewAdapter ( private val mainActivity: MainActivity, private val values: List<Account>) : RecyclerView.Adapter<AccountRecyclerViewAdapter.ViewHolder>() {
+class AccountRecyclerViewAdapter ( private val mainActivity: MainActivity, private val values: List<CoinbaseProData>) : RecyclerView.Adapter<AccountRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(AccountFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(ExchangeDetailsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -21,13 +21,13 @@ class AccountRecyclerViewAdapter ( private val mainActivity: MainActivity, priva
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: AccountFragmentBinding) : RecyclerView.ViewHolder(binding.root){
-                val currencyView: TextView = binding.accountCurrency
+    inner class ViewHolder(binding: ExchangeDetailsCardBinding) : RecyclerView.ViewHolder(binding.root){
+                //val currencyView: TextView = binding.accountCurrency
                 val balanceView: TextView = binding.accountBalance
-                val tradingEnabledView: TextView = binding.tradingEnabled
+                val tradingEnabledView: TextView = binding.exchangeName
 
-                fun bind(account: Account){
-                    currencyView.text = account.currency
+                fun bind(account: CoinbaseProData){
+                    //currencyView.text = account.currency
                     balanceView.text = account.balance
                     balanceView.setTextColor(
                         mainActivity.resources.getColor(
@@ -45,7 +45,7 @@ class AccountRecyclerViewAdapter ( private val mainActivity: MainActivity, priva
                 }
 
         override fun toString(): String {
-            return "ViewHolder(currencyView=${currencyView.text}, balanceView=${balanceView.text}, holdView=${tradingEnabledView.text})"
+            return "ViewHolder(balanceView=${balanceView.text}, holdView=${tradingEnabledView.text})"
         }
     }
 }

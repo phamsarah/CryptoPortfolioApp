@@ -2,7 +2,9 @@ package com.example.sarahsapp.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 
-class Student(val course: SchoolCourse = SchoolCourse(), val friend: Friend = Friend()){
+class Student(
+    val course: SchoolCourse = SchoolCourse(),
+    val friend: Friend = Friend()){
 
     fun beSmart() {
         course.study()

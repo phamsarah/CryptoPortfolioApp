@@ -6,60 +6,62 @@
     tools:ignore="UnusedAttribute">
 
     <FrameLayout
-        android:id="@+id/email_frame"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginVertical="2dp"
-        android:layout_marginHorizontal="4dp"
-        android:background="?attr/colorSecondary">
-
-        <!-- TODO: Set MaterialCardView transition name. -->
-        <!--            android:onClick="@{(view) -> listener.onEmailClicked(view, email)}"-->
+        android:layout_marginHorizontal="4dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_margin="10dp"
             android:clickable="true"
             android:focusable="true"
+            app:cardElevation="5dp"
             style="?attr/materialCardViewElevatedStyle"
+            android:transitionName="@{@string/exchange_item_card_transition}"
+            app:cardBackgroundColor="@color/cardview_light_background"
             app:cardPreventCornerOverlap="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/currency_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/grid_2"
-                    android:layout_marginTop="@dimen/grid_1"
                     android:layout_marginEnd="@dimen/grid_2"
                     android:maxLines="1"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textStyle="bold"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/currency_balance"
+                    app:layout_goneMarginEnd="@dimen/grid_2"
+                    tools:text="BTC" />
+
+                <TextView
+                    android:id="@+id/currency_balance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_2"
+                    android:layout_marginEnd="@dimen/grid_2"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/image"
+                    app:layout_constraintLeft_toRightOf="@id/currency_name"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_goneMarginEnd="@dimen/grid_2"
-                    tools:text="Coinbase Pro" />
-
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="@dimen/grid_2"
-                    android:layout_marginTop="@dimen/grid_1"
-                    android:layout_marginEnd="@dimen/grid_2"
-                    android:src="@drawable/coinbasepro"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    tools:text="$100" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

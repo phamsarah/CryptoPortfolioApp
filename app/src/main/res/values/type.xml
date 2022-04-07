@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Reply.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/work_sans_bold</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+    </style>
+    <style name="TextAppearance.Reply.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/work_sans_bold</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+    </style>
+
+</resources>

@@ -21,8 +21,7 @@ class LoadingSpinnerFragment : Fragment() {
         splashScreenImage = view.findViewById(R.id.moneySarah)
         animateMoneySarah()
         splashScreenImage.setOnClickListener {
-//            findNavController().navigate(R.id.action_loadingSpinnerFragment_to_serviceListsFragment)
-            val action = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToServiceListsFragment()
+            val action = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToExchangesListFragment()
             view.findNavController().navigate(action)
         }
 

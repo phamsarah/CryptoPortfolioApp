@@ -5,7 +5,7 @@ package com.example.sarahsapp.data.model
  *
  */
 
-data class Account (
+data class CoinbaseProData(
     val available: String,
     val balance: String,
     val currency: String,

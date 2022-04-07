@@ -1,41 +1,88 @@
 package com.example.sarahsapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sarahsapp.BuildConfig
-import com.example.sarahsapp.activities.MainActivity
-import com.example.sarahsapp.data.model.CoinbaseAccount
+import com.example.sarahsapp.R
+import com.example.sarahsapp.data.model.*
 import com.example.sarahsapp.data.request.RequestBuilder
 import com.example.sarahsapp.data.request.RequestHeader
-import com.example.sarahsapp.databinding.FragmentPortfolioBinding
+import com.example.sarahsapp.databinding.ExchangeDetailsCardBinding
+import com.example.sarahsapp.ui.adapters.CurrencyRecyclerViewAdapter
+import com.example.sarahsapp.ui.utils.themeColor
+import com.google.android.material.transition.MaterialContainerTransform
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+typealias OnCoinbaseDataSuccess = (CoinbaseAccount?) -> Unit
 
-class CoinbaseFragment : Fragment() {
-    private var _binding: FragmentPortfolioBinding? = null
+class CoinbaseFragment : Fragment(){
+    private var _binding: ExchangeDetailsCardBinding? = null
 
     // Valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment
+            duration = resources.getInteger(R.integer.open_exchange_details_transition_duration).toLong()
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().themeColor(com.google.android.material.R.attr.colorSurface))
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentPortfolioBinding.inflate(inflater,container,false)
+        _binding = ExchangeDetailsCardBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        makeNetworkCall(createAPINetworkCall(), requireActivity() as MainActivity, binding.accountRecyclerView)
+
+        val exchangeImage: ImageView = binding.exchangeImage
+        val exchangeName: TextView = binding.exchangeName
+
+        makeNetworkCall(createAPINetworkCall()){ coinbaseResponse ->
+            if (coinbaseResponse != null){
+                val values: List<Data> = coinbaseResponse.data.filter { s -> s.balance.amount.toFloat() > 0.00 }
+                val currencyList = values.map { it.balance.toCurrencyData() }
+
+                binding.currencyRecyclerview.layoutManager = GridLayoutManager(requireContext(),1)
+                binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
+                binding.exchangeImage.setImageResource(R.drawable.coinbase)
+                binding.exchangeName.text = context?.getString(R.string.coinbase)
+            }
+        }
+
+        binding.navigationIcon.setOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        exchangeImage.setImageResource(R.drawable.coinbase)
+        exchangeName.text = context?.getString(R.string.coinbase)
+        // TODO: Add a case if not able to fetch data
+//        else {
+//            Toast.makeText(context, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
+//        }
     }
+
+    private fun Balance.toCurrencyData() = CurrencyData(
+        name = currency,
+        balance = amount
+    )
 
     private fun createAPINetworkCall(): Call<CoinbaseAccount> {
 
@@ -60,30 +107,22 @@ class CoinbaseFragment : Fragment() {
         return destinationService.getCoinbaseHeaders(accessKey, accessSign, accessTimeStamp)
     }
 
-    private fun makeNetworkCall(networkCallRequest : Call<CoinbaseAccount>, mainActivity: MainActivity, recyclerView: RecyclerView){
+    private fun makeNetworkCall(networkCallRequest : Call<CoinbaseAccount>, onSuccess: OnCoinbaseDataSuccess){
         networkCallRequest.enqueue(object : Callback<CoinbaseAccount> {
-            override fun onResponse(call: Call<CoinbaseAccount>, response: Response<CoinbaseAccount>) {
+            override fun onResponse(call: Call<CoinbaseAccount>, response: Response<CoinbaseAccount>){
                 if(response.isSuccessful){
-                    val accountList: CoinbaseAccount? = response.body()
-                    if (accountList != null){
-                        recyclerView.layoutManager = GridLayoutManager(context, 2)
-
-                        Log.d("coinbaseoutput", accountList.toString())
-                        //recyclerView.adapter = AccountRecyclerViewAdapter(mainActivity, accountList.filter { s -> s.balance.toFloat() > 0.00})
-                    }
-                } else {
-                    Toast.makeText(context, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
+                    val coinbaseData: CoinbaseAccount? = response.body()
+                    onSuccess.invoke(coinbaseData)
                 }
             }
 
             override fun onFailure(call: Call<CoinbaseAccount>, t: Throwable) {
                 Toast.makeText(context, "Something went wrong $t $call", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 
-    fun ByteArray.toHex(): String {
+    private fun ByteArray.toHex(): String {
         return joinToString("") { "%02x".format(it) }
     }
 
@@ -95,6 +134,6 @@ class CoinbaseFragment : Fragment() {
         const val accessType = "GET"
 
         // We are retrieving User accounts
-        const val accessPath = "/v2/accounts"
+        const val accessPath = "/v2/accounts?limit=100"
     }
 }

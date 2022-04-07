@@ -3,10 +3,10 @@ package com.example.sarahsapp.data.model
 import com.example.sarahsapp.R
 
 /**
- *  Service: Coinbase Pro, Coinbase, NiceHash, or Robinhood
+ *  Exchange: Coinbase Pro, Coinbase, NiceHash, or Robinhood
  *  Each service has a portfolio for the user to views
  */
-class Service(position: Int) {
+class Exchange(position: Int) {
     var name: Int = 0
     var image: Int = 0
 

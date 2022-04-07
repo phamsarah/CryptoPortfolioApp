@@ -11,4 +11,6 @@
     <string name="nicehash">Nicehash</string>
     <string name="robinhood">Robinhood</string>
 
+    <string name="exchange_item_card_transition">exchange_item_%1$s</string>
+
 </resources>

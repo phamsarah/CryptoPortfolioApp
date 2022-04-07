@@ -10,17 +10,22 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 object RequestBuilder {
-    private const val COINBASEPRO_URL = "https://api.exchange.coinbase.com/"
-
     // Http Client
     private val okHttpClient = OkHttpClient.Builder()
 
-    // Retrofit builder with JSON output
-    private val jsonRequestBuilder = Retrofit.Builder().baseUrl(COINBASEPRO_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient.build())
+    fun <T> buildJsonRequest(requestType: Class<T>, position: Int): T {
+        var apiUrl = ""
 
-    fun <T> buildJsonRequest(requestType: Class<T>): T {
+        when(position){
+            0 -> apiUrl = "https://api.exchange.coinbase.com/"
+            1 -> apiUrl = "https://api.coinbase.com/"
+        }
+
+        // Retrofit builder with JSON output
+       val jsonRequestBuilder = Retrofit.Builder().baseUrl(apiUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient.build())
+
         return jsonRequestBuilder.build().create(requestType)
     }
 }
