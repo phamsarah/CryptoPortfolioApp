@@ -25,6 +25,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 typealias OnCoinbaseProDataSuccess = (List<CoinbaseProData>?) -> Unit
@@ -105,7 +106,7 @@ class CoinbaseProFragment : Fragment() {
 
         // Creating the API request with headers dynamically, since the signature needs a timestamp
 
-        return destinationService.accounts(
+        return destinationService.getCoinbaseProHeaders(
             accessKey,
             accessPassphrase,
             accessSign,
@@ -117,9 +118,8 @@ class CoinbaseProFragment : Fragment() {
         networkCallRequest.enqueue(object : Callback<List<CoinbaseProData>> {
             override fun onResponse(call: Call<List<CoinbaseProData>>, response: Response<List<CoinbaseProData>>) {
                 if (response.isSuccessful) {
-                    val accountList: List<CoinbaseProData>? = response.body()
-                    onSuccess.invoke(accountList)
-
+                    val coinbaseProData: List<CoinbaseProData>? = response.body()
+                    onSuccess.invoke(coinbaseProData)
                 }
             }
 

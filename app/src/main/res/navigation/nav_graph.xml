@@ -15,11 +15,6 @@
             app:destination="@id/exchangesListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/coinbaseProFragment"
-        android:name="com.example.sarahsapp.fragments.CoinbaseProFragment"
-        android:label="fragment_portfolio"
-        tools:layout="@layout/exchange_details_card" />
-    <fragment
         android:id="@+id/exchangesListFragment"
         android:name="com.example.sarahsapp.fragments.ExchangesListsFragment"
         android:label="exchanges_lists_fragment"
@@ -30,10 +25,23 @@
         <action
             android:id="@+id/action_exchangesListsFragment_to_coinbaseFragment"
             app:destination="@id/coinbaseFragment" />
+        <action
+            android:id="@+id/action_exchangesListFragment_to_nicehashFragment"
+            app:destination="@id/nicehashFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/coinbaseProFragment"
+        android:name="com.example.sarahsapp.fragments.CoinbaseProFragment"
+        android:label="fragment_portfolio"
+        tools:layout="@layout/exchange_details_card" />
     <fragment
         android:id="@+id/coinbaseFragment"
         android:name="com.example.sarahsapp.fragments.CoinbaseFragment"
         android:label="coinbase_fragment"
         tools:layout="@layout/exchange_details_card" />
+    <fragment
+        android:id="@+id/nicehashFragment"
+        android:name="com.example.sarahsapp.fragments.NicehashFragment"
+        android:label="NicehashFragment"
+        tools:layout="@layout/exchange_details_card"/>
 </navigation>

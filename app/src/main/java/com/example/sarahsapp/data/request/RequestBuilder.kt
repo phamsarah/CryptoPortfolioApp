@@ -19,6 +19,7 @@ object RequestBuilder {
         when(position){
             0 -> apiUrl = "https://api.exchange.coinbase.com/"
             1 -> apiUrl = "https://api.coinbase.com/"
+            2 -> apiUrl = "https://api2.nicehash.com/"
         }
 
         // Retrofit builder with JSON output
