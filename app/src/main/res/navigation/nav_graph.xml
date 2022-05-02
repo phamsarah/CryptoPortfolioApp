@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_exchangesListFragment_to_nicehashFragment"
             app:destination="@id/nicehashFragment" />
+        <action
+            android:id="@+id/action_exchangesListFragment_to_LofiActivity"
+            app:destination="@id/LofiActivity" />
     </fragment>
     <fragment
         android:id="@+id/coinbaseProFragment"
@@ -44,4 +47,9 @@
         android:name="com.example.sarahsapp.fragments.NicehashFragment"
         android:label="NicehashFragment"
         tools:layout="@layout/exchange_details_card"/>
+    <activity
+        android:id="@+id/LofiActivity"
+        android:name="com.example.sarahsapp.activities.LofiActivity"
+        android:label="LofiActivity"
+        tools:layout="@layout/lofi_activity_layout"/>
 </navigation>

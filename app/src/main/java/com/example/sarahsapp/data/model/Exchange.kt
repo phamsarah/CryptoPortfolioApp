@@ -24,6 +24,10 @@ class Exchange(position: Int) {
                 name = R.string.nicehash
                 image = R.drawable.nicehash
             }
+            3 -> {
+                name = R.string.lofi
+                image = R.drawable.lofi
+            }
         }
     }
 

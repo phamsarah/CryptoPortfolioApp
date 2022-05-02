@@ -9,10 +9,11 @@
     <string name="coinbase_pro">Coinbase Pro</string>
     <string name="coinbase">Coinbase</string>
     <string name="nicehash">Nicehash</string>
+    <string name="lofi">LOFI</string>
 
     <string name="exchange_item_card_transition">exchange_item</string>
 
-<!--    Error Messages-->
+    <!--    Error Messages-->
     <string name="time_error">Could Not Grab Server Time</string>
 
 </resources>

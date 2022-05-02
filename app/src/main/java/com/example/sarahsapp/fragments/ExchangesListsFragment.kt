@@ -24,11 +24,7 @@ class ExchangesListsFragment : Fragment(), ExchangesListAdapter.ExchangesItemLis
 
     private val exchangesListAdapter = ExchangesListAdapter(this)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = ExchangesListsFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -59,6 +55,7 @@ class ExchangesListsFragment : Fragment(), ExchangesListAdapter.ExchangesItemLis
             0 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToCoinbaseProFragment()
             1 -> directions = ExchangesListsFragmentDirections.actionExchangesListsFragmentToCoinbaseFragment()
             2 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToNicehashFragment()
+            3 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToLofiActivity()
         }
 
         findNavController().navigate(directions, extras)
