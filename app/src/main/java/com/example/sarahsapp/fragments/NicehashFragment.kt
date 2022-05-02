@@ -2,6 +2,7 @@ package com.example.sarahsapp.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sarahsapp.BuildConfig
 import com.example.sarahsapp.R
-import com.example.sarahsapp.data.model.NicehashData
-import com.example.sarahsapp.data.model.NicehashTime
+import com.example.sarahsapp.data.model.*
 import com.example.sarahsapp.data.request.RequestBuilder
 import com.example.sarahsapp.data.request.RequestHeader
 import com.example.sarahsapp.databinding.ExchangeDetailsCardBinding
+import com.example.sarahsapp.ui.adapters.CurrencyRecyclerViewAdapter
 import com.example.sarahsapp.ui.utils.themeColor
 import com.google.android.material.transition.MaterialContainerTransform
 import retrofit2.Call
@@ -66,20 +67,14 @@ class NicehashFragment: Fragment() {
     }
 
     private fun createAPINetworkCall(destinationService: RequestHeader, serverTime: String): Call<NicehashData> {
-        // Time stamp, creates a unique signature before calling, where security comes in handy
-//        val accessTimeStamp = "" + System.currentTimeMillis()
-
         // Nonce is a random string
         val nonce = UUID.randomUUID().toString()
 
         // Input is a byte array composed of ordered fields using zero byte as a separator using ISO-8859-1 encoding
-        //TODO: Put null for Query to see what would happen
-        val input = listOf(secret, accessKey, serverTime, nonce, null, orgId, null, accessType, accessPath)
-            .map { it?.toByteArray(Charsets.ISO_8859_1) }
-        val testInput = listOf(secret, accessKey, "1649437311001", "p1agy0rqtypdl530blpbbo0c6zj3d98u", null, orgId, null, accessType, accessPath)
+        val input = listOf(accessKey, serverTime, nonce, null, orgId, null, accessType, accessPath, null)
             .map { it?.toByteArray(Charsets.ISO_8859_1) }
 
-        val digest = signInputByHmacSha256(testInput)
+        val digest = signInputByHmacSha256(input)
         val auth = "$accessKey:$digest"
 
         // Creating the API request with headers dynamically, since the signature needs a timestamp
@@ -108,15 +103,15 @@ class NicehashFragment: Fragment() {
     private fun makeCalltoAccounts(destinationService: RequestHeader, serverTime: String){
         makeNetworkCall(createAPINetworkCall(destinationService, serverTime)){ nicehashResponse ->
             if(nicehashResponse != null){
-                binding.currencyRecyclerview.layoutManager = GridLayoutManager(context, 1)
 
-//                val currencies = coinbaseProResponse.filter { s -> s.balance.toFloat() > 0.00 }
-//                val currencyList = currencies.map { it.toCurrencyData() }
-//                binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
+                val values: List<Currencies> = nicehashResponse.currencies.filter { s -> s.totalBalance.toFloat() > 0.00}
+                val currencyList = values.map { it.toCurrencyData() }
+
+                binding.currencyRecyclerview.layoutManager = GridLayoutManager(context, 1)
+                binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
             }
         }
     }
-
 
     private fun signInputByHmacSha256(segments: List<ByteArray?>): String? {
         return try {
@@ -137,6 +132,7 @@ class NicehashFragment: Fragment() {
                 }
             }
 
+            // TODO: need to confirm if the below is correct
             sha256_HMAC.doFinal().toHex()
 
         } catch (e: Exception) {
@@ -150,19 +146,27 @@ class NicehashFragment: Fragment() {
                 if (response.isSuccessful) {
                     val nicehashData: NicehashData? = response.body()
                     onSuccess.invoke(nicehashData)
-                } else { Toast.makeText(context, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show() }
+                } else {
+                    Toast.makeText(context, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("ErrorNetwork", "Something Went Wrong: " + response.message())
+                }
             }
 
             override fun onFailure(call: Call<NicehashData>, t: Throwable) {
                 Toast.makeText(context, "Something went wrong $t $call", Toast.LENGTH_SHORT).show()
+                Log.e("ErrorNetwork", "Something Went Wrong: " + t.message + " call: " + call.toString() )
             }
         })
     }
 
-
     private fun ByteArray.toHex(): String {
         return joinToString("") { "%02x".format(it) }
     }
+
+    private fun Currencies.toCurrencyData() = CurrencyData(
+        name = currency,
+        balance = totalBalance
+    )
 
     companion object {
         const val secret = BuildConfig.nicehashSecret

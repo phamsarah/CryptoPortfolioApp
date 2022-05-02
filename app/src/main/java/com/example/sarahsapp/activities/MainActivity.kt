@@ -2,11 +2,7 @@ package com.example.sarahsapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.ActivityMainBinding
 import com.example.sarahsapp.ui.utils.contentView

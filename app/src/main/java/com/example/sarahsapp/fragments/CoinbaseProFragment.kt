@@ -60,11 +60,10 @@ class CoinbaseProFragment : Fragment() {
 
         makeNetworkCall(createAPINetworkCall()) { coinbaseProResponse ->
             if (coinbaseProResponse != null) {
-                binding.currencyRecyclerview.layoutManager = GridLayoutManager(context, 1)
-
                 val currencies = coinbaseProResponse.filter { s -> s.balance.toFloat() > 0.00 }
                 val currencyList = currencies.map { it.toCurrencyData() }
 
+                binding.currencyRecyclerview.layoutManager = GridLayoutManager(context, 1)
                 binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
             }
         }

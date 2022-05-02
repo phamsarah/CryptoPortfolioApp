@@ -63,8 +63,6 @@ class CoinbaseFragment : Fragment(){
                 // todo: Fragment CoinbaseFragment not attached to a context, requireContext. invoke()
                 binding.currencyRecyclerview.layoutManager = GridLayoutManager(requireContext(),1)
                 binding.currencyRecyclerview.adapter = CurrencyRecyclerViewAdapter(currencyList)
-                binding.exchangeImage.setImageResource(R.drawable.coinbase)
-                binding.exchangeName.text = context?.getString(R.string.coinbase)
             }
         }
 
