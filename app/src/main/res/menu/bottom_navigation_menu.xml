@@ -11,4 +11,9 @@
         android:enabled="true"
         android:icon="@drawable/lofi"
         android:title="@string/exchanges"/>
+    <item
+        android:id="@+id/GPUCalculatorFragment"
+        android:enabled="true"
+        android:icon="@drawable/calculate"
+        android:title="@string/calculator"/>
 </menu>

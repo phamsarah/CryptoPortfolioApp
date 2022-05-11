@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        initYouTubePlayerView()
+    }
+
     private fun initYouTubePlayerView() {
         lifecycle.addObserver(youTubePlayerView)
 
