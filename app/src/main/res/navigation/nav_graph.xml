@@ -11,12 +11,17 @@
         android:label="fragment_loading_spinner"
         tools:layout="@layout/fragment_loading_spinner" >
         <action
-            android:id="@+id/action_loadingSpinnerFragment_to_exchangesListFragment"
-            app:destination="@id/exchangesListFragment" />
-        <action
-            android:id="@+id/action_loadingSpinnerFragment_to_LofiActivity"
-            app:destination="@id/LofiActivity" />
+            android:id="@+id/action_loadingSpinnerFragment_to_RelaxFragment"
+            app:destination="@id/relaxFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/relaxFragment"
+        android:name="com.example.sarahsapp.fragments.RelaxFragment"
+        android:label="relax_fragment"
+        tools:layout="@layout/relax_fragment" >
+    </fragment>
+
     <fragment
         android:id="@+id/exchangesListFragment"
         android:name="com.example.sarahsapp.fragments.ExchangesListsFragment"
@@ -31,9 +36,6 @@
         <action
             android:id="@+id/action_exchangesListFragment_to_nicehashFragment"
             app:destination="@id/nicehashFragment" />
-        <action
-            android:id="@+id/action_exchangesListFragment_to_LofiActivity"
-            app:destination="@id/LofiActivity" />
         <action
             android:id="@+id/action_exchangesListFragment_to_GPUCalculatorFragment"
             app:destination="@id/GPUCalculatorFragment" />
@@ -53,11 +55,6 @@
         android:name="com.example.sarahsapp.fragments.NicehashFragment"
         android:label="NicehashFragment"
         tools:layout="@layout/exchange_details_card"/>
-    <activity
-        android:id="@+id/LofiActivity"
-        android:name="com.example.sarahsapp.activities.LofiActivity"
-        android:label="LofiActivity"
-        tools:layout="@layout/lofi_activity_layout"/>
     <fragment
         android:id="@+id/GPUCalculatorFragment"
         android:name="com.example.sarahsapp.fragments.GPUCalculatorFragment"

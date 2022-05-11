@@ -12,6 +12,7 @@
     <string name="lofi">LOFI</string>
 
     <!-- Bottom Actionbar Button Names -->
+    <string name="relax">Relax</string>
     <string name="exchanges">Exchanges</string>
     <string name="calculator">GPU Calculator</string>
 

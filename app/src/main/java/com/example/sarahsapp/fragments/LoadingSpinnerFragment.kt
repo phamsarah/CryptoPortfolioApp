@@ -9,10 +9,11 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.sarahsapp.R
-import com.example.sarahsapp.callbacks.OnRotatingHeadClicked
+import com.example.sarahsapp.activities.MainActivity
+
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LoadingSpinnerFragment : Fragment() {
-    private lateinit var onHeadClicked : OnRotatingHeadClicked
 
     private lateinit var splashScreenImage: ImageView
 
@@ -20,19 +21,13 @@ class LoadingSpinnerFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_loading_spinner, container, false)
 
-        if(activity is OnRotatingHeadClicked){
-            onHeadClicked = activity as OnRotatingHeadClicked
-        }
-
         splashScreenImage = view.findViewById(R.id.moneySarah)
         animateMoneySarah()
         splashScreenImage.setOnClickListener {
-            val action = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToExchangesListFragment()
+            val actionRelax = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToRelaxFragment()
+            (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+            view.findNavController().navigate(actionRelax)
 
-            val actionLofi = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToLofiActivity()
-
-            view.findNavController().navigate(actionLofi)
-            onHeadClicked.onClicked()
         }
 
         return view

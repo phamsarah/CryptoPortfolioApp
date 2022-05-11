@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/exchanges"
+        android:id="@+id/relaxFragment"
         android:enabled="true"
         android:icon="@drawable/coinbase"
-        android:title="@string/exchanges"/>
+        android:title="@string/relax"/>
     <item
-        android:id="@+id/calculator"
+        android:id="@+id/exchangesListFragment"
         android:enabled="true"
         android:icon="@drawable/lofi"
-        android:title="@string/calculator"/>
+        android:title="@string/exchanges"/>
 </menu>
