@@ -52,4 +52,9 @@
         android:name="com.example.sarahsapp.activities.LofiActivity"
         android:label="LofiActivity"
         tools:layout="@layout/lofi_activity_layout"/>
+    <fragment
+        android:id="@+id/GPUCalculatorFragment"
+        android:name="com.example.sarahsapp.GPUCalculatorFragment"
+        android:label="gpu_calculator_fragment"
+        tools:layout="@layout/gpu_calculator_fragment" />
 </navigation>

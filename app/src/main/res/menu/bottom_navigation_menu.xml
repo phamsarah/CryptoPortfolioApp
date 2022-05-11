@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/exchanges"
+        android:enabled="true"
+        android:icon="@drawable/coinbase"
+        android:title="@string/exchanges"/>
+    <item
+        android:id="@+id/calculator"
+        android:enabled="true"
+        android:icon="@drawable/lofi"
+        android:title="@string/calculator"/>
+</menu>
