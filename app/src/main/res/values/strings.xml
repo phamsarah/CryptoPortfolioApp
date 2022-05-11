@@ -20,5 +20,6 @@
 
     <!--    Error Messages-->
     <string name="time_error">Could Not Grab Server Time</string>
+    <string name="gpu_fragment_error">Error Loading Nicehash Calculator</string>
 
 </resources>

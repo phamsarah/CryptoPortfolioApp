@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.GpuCalculatorFragmentBinding
 import java.net.MalformedURLException
 import java.net.URL
@@ -29,9 +31,6 @@ class GPUCalculatorFragment : Fragment() {
         var webContent = "<iframe src=\"https://widget.nicehash.com/profcalc\" width=\"400\" height=\"350\" scrolling=\"no\" id=\"nhiframe\"></iframe>"
         val calcWebView: WebView = binding.calculatorWebView
 
-        val DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
-
-        calcWebView.settings.userAgentString = DESKTOP_USER_AGENT
         calcWebView.webChromeClient = WebChromeClient()
         calcWebView.webViewClient = WebViewClient()
         calcWebView.settings.javaScriptEnabled = true
@@ -40,19 +39,16 @@ class GPUCalculatorFragment : Fragment() {
             val matcher = Pattern.compile("src=\\\"([^\\\"]+)\\\"").matcher(webContent)
             matcher.find()
 
-            val src = matcher.group(1)
-            webContent = src
-
             try {
-                val myURL = URL(src)
-                calcWebView.loadUrl(src)
+                calcWebView.loadUrl(matcher.group(1)!!)
             } catch (e: MalformedURLException){
+                Toast.makeText(activity, R.string.gpu_fragment_error, Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
-        } else {
-            calcWebView.loadDataWithBaseURL(null,"<style>img{display: inline;height: auto;max-width: 100%;}</style>" + webContent, "text/html", "UTF-8", null)
         }
 
         return binding.root
     }
+
+
 }
