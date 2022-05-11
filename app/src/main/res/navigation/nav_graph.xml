@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/exchangesListFragment"
-        android:name="com.example.sarahsapp.fragments.ExchangesListsFragment"
+        android:name="com.example.sarahsapp.fragments.ExchangesFragment"
         android:label="exchanges_lists_fragment"
         tools:layout="@layout/exchanges_lists_fragment" >
         <action

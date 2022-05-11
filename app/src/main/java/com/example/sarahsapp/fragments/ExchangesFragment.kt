@@ -17,7 +17,7 @@ import com.google.android.material.transition.MaterialElevationScale
 /**
  * Home Fragment
  */
-class ExchangesListsFragment : Fragment(), ExchangesListAdapter.ExchangesItemListener {
+class ExchangesFragment : Fragment(), ExchangesListAdapter.ExchangesItemListener {
     private lateinit var _binding: ExchangesListsFragmentBinding
 
     private val binding get() = _binding
@@ -52,9 +52,9 @@ class ExchangesListsFragment : Fragment(), ExchangesListAdapter.ExchangesItemLis
         lateinit var directions: NavDirections
 
         when (position) {
-            0 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToCoinbaseProFragment()
-            1 -> directions = ExchangesListsFragmentDirections.actionExchangesListsFragmentToCoinbaseFragment()
-            2 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToNicehashFragment()
+            0 -> directions = ExchangesFragmentDirections.actionExchangesListFragmentToCoinbaseProFragment()
+            1 -> directions = ExchangesFragmentDirections.actionExchangesListsFragmentToCoinbaseFragment()
+            2 -> directions = ExchangesFragmentDirections.actionExchangesListFragmentToNicehashFragment()
         }
 
         findNavController().navigate(directions, extras)

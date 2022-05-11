@@ -25,12 +25,25 @@ class LoadingSpinnerFragment : Fragment() {
         animateMoneySarah()
         splashScreenImage.setOnClickListener {
             val actionRelax = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToRelaxFragment()
-            (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+            showBottomNavMenu()
             view.findNavController().navigate(actionRelax)
-
         }
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        hideBottomNavMenu()
+    }
+
+    private fun hideBottomNavMenu(){
+        (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.GONE
+    }
+
+    private fun showBottomNavMenu(){
+        (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
     }
 
     private fun animateMoneySarah(){
