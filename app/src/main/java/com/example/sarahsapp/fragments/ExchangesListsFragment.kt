@@ -55,7 +55,6 @@ class ExchangesListsFragment : Fragment(), ExchangesListAdapter.ExchangesItemLis
             0 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToCoinbaseProFragment()
             1 -> directions = ExchangesListsFragmentDirections.actionExchangesListsFragmentToCoinbaseFragment()
             2 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToNicehashFragment()
-            3 -> directions = ExchangesListsFragmentDirections.actionExchangesListFragmentToLofiActivity()
         }
 
         findNavController().navigate(directions, extras)

@@ -28,7 +28,7 @@ class ExchangesListAdapter(private val listener: ExchangesItemListener): Recycle
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val exchange = Exchange(position)
+        val exchange = Exchange.exchangeList[position]
         holder.bind(exchange, position)
     }
 
@@ -48,9 +48,9 @@ class ExchangesListAdapter(private val listener: ExchangesItemListener): Recycle
         }
 
         @SuppressLint("NewApi")
-        fun bind(exchange: Exchange, position: Int){
-            nameView.text = view.context.getString(exchange.name)
-            imageView.setImageResource(exchange.image)
+        fun bind(exchange: Pair<Int, Int>, position: Int){
+            nameView.text = view.context.getString(exchange.first)
+            imageView.setImageResource(exchange.second)
 
             binding.position = position
 
@@ -65,6 +65,6 @@ class ExchangesListAdapter(private val listener: ExchangesItemListener): Recycle
         }
     }
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = Exchange.exchangeList.size
 
 }
