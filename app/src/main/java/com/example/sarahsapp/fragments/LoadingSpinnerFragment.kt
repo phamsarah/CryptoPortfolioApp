@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.sarahsapp.R
 import com.example.sarahsapp.activities.MainActivity
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LoadingSpinnerFragment : Fragment() {
