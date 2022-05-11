@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loadingSpinnerFragment_to_exchangesListFragment"
             app:destination="@id/exchangesListFragment" />
+        <action
+            android:id="@+id/action_loadingSpinnerFragment_to_LofiActivity"
+            app:destination="@id/LofiActivity" />
     </fragment>
     <fragment
         android:id="@+id/exchangesListFragment"
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_exchangesListFragment_to_LofiActivity"
             app:destination="@id/LofiActivity" />
+        <action
+            android:id="@+id/action_exchangesListFragment_to_GPUCalculatorFragment"
+            app:destination="@id/GPUCalculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/coinbaseProFragment"
@@ -54,7 +60,7 @@
         tools:layout="@layout/lofi_activity_layout"/>
     <fragment
         android:id="@+id/GPUCalculatorFragment"
-        android:name="com.example.sarahsapp.GPUCalculatorFragment"
+        android:name="com.example.sarahsapp.fragments.GPUCalculatorFragment"
         android:label="gpu_calculator_fragment"
         tools:layout="@layout/gpu_calculator_fragment" />
 </navigation>

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sarahsapp.BuildConfig
-import com.example.sarahsapp.GPUCalculatorFragment
 import com.example.sarahsapp.R
 import com.example.sarahsapp.data.model.*
 import com.example.sarahsapp.data.request.RequestBuilder

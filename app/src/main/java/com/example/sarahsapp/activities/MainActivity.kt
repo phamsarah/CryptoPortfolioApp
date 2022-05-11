@@ -7,14 +7,13 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.example.sarahsapp.GPUCalculatorFragment
+import com.example.sarahsapp.fragments.GPUCalculatorFragment
 import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.ActivityMainBinding
 import com.example.sarahsapp.ui.utils.contentView
 import com.example.sarahsapp.ui.viewmodels.Student
 import org.koin.android.ext.android.get
 import com.example.sarahsapp.callbacks.OnRotatingHeadClicked
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity(), OnRotatingHeadClicked {
                 R.id.calculator -> {
                     Toast.makeText(this, "Calculator", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, GPUCalculatorFragment() )
+                    //findNavController(R.id.calculator).navigate()
                     true
                 }
                 else -> false

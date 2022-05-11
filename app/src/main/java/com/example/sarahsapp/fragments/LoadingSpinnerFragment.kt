@@ -28,7 +28,10 @@ class LoadingSpinnerFragment : Fragment() {
         animateMoneySarah()
         splashScreenImage.setOnClickListener {
             val action = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToExchangesListFragment()
-            view.findNavController().navigate(action)
+
+            val actionLofi = LoadingSpinnerFragmentDirections.actionLoadingSpinnerFragmentToLofiActivity()
+
+            view.findNavController().navigate(actionLofi)
             onHeadClicked.onClicked()
         }
 
