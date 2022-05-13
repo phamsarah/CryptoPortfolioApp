@@ -12,6 +12,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.RelaxFragmentBinding
 import com.google.firebase.database.DataSnapshot
@@ -61,8 +63,15 @@ class RelaxFragment : Fragment() {
         val randomImgBackgroundColor: String = imageList.keys.random() as String
         val randomImage = imageList[randomImgBackgroundColor]
 
+        var cropOptions: RequestOptions = RequestOptions
+            .fitCenterTransform()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .override(imageView.width, imageView.height)
+
         Glide.with(this)
             .load(randomImage)
+            .apply(cropOptions)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(imageView)
 
         backgroundView.setBackgroundColor(Color.parseColor("#$randomImgBackgroundColor"))
