@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
 //        viewModel.performAction()
 
         bottomActionBar = binding.bottomNavigation
-
         youTubePlayerView = binding.youtubePlayerView
+
         initYouTubePlayerView()
 
     }

@@ -21,5 +21,9 @@
     <!--    Error Messages-->
     <string name="time_error">Could Not Grab Server Time</string>
     <string name="gpu_fragment_error">Error Loading Nicehash Calculator</string>
+    <string name="firebase_storage_error">Error Loading Images</string>
+
+    <!-- Firebase Storage Images -->
+    <string name="image_folder">relaxImages</string>
 
 </resources>

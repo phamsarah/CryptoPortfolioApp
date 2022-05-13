@@ -4,12 +4,12 @@
     <item
         android:id="@+id/relaxFragment"
         android:enabled="true"
-        android:icon="@drawable/coinbase"
+        android:icon="@drawable/relax_icon"
         android:title="@string/relax"/>
     <item
         android:id="@+id/exchangesListFragment"
         android:enabled="true"
-        android:icon="@drawable/lofi"
+        android:icon="@drawable/exchange_bottom_icon"
         android:title="@string/exchanges"/>
     <item
         android:id="@+id/GPUCalculatorFragment"

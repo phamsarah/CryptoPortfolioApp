@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.GpuCalculatorFragmentBinding
 import java.net.MalformedURLException
-import java.net.URL
 import java.util.regex.Pattern
 
 
@@ -28,7 +27,7 @@ class GPUCalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = GpuCalculatorFragmentBinding.inflate(inflater,container,false)
 
-        var webContent = "<iframe src=\"https://widget.nicehash.com/profcalc\" width=\"400\" height=\"350\" scrolling=\"no\" id=\"nhiframe\"></iframe>"
+        val webContent = "<iframe src=\"https://widget.nicehash.com/profcalc\" width=\"400\" height=\"350\" scrolling=\"no\" id=\"nhiframe\"></iframe>"
         val calcWebView: WebView = binding.calculatorWebView
 
         calcWebView.webChromeClient = WebChromeClient()
@@ -49,6 +48,4 @@ class GPUCalculatorFragment : Fragment() {
 
         return binding.root
     }
-
-
 }
