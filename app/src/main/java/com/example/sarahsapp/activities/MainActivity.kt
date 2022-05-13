@@ -2,6 +2,7 @@ package com.example.sarahsapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var youTubePlayerView: YouTubePlayerView
 
     private  lateinit var bottomActionBar: NavigationBarView
+    private lateinit var bottomShadowBar: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById( R.id.nav_host_fragment) as NavHostFragment
         val bottomNavigationView: BottomNavigationView = binding.bottomNavigation
+
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
 
 
@@ -50,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 //        viewModel.performAction()
 
         bottomActionBar = binding.bottomNavigation
+        bottomShadowBar = binding.shadowView
         youTubePlayerView = binding.youtubePlayerView
 
         initYouTubePlayerView()

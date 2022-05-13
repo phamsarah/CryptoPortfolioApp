@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/down_arrow.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/rounded_bottom_navigation.xml" value="0.254" />
+        <entry key="app/src/main/res/drawable/shadow_gradient.xml" value="0.254" />
         <entry key="app/src/main/res/font/work_sans.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/font/work_sans_bold.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/font/work_sans_medium.xml" value="0.2942708333333333" />

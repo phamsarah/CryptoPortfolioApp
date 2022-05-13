@@ -39,10 +39,12 @@ class LoadingSpinnerFragment : Fragment() {
 
     private fun hideBottomNavMenu(){
         (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.GONE
+        (requireActivity() as MainActivity).findViewById<View>(R.id.shadow_view).visibility = View.GONE
     }
 
     private fun showBottomNavMenu(){
         (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+        (requireActivity() as MainActivity).findViewById<View>(R.id.shadow_view).visibility = View.VISIBLE
     }
 
     private fun animateMoneySarah(){
