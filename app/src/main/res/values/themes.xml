@@ -30,7 +30,7 @@
     <style name="Theme.Reply.DayNight" parent="Theme.Reply"/>
 
     <style name="Theme.Reply" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
 
         <item name="textAppearanceBody1">@style/TextAppearance.Reply.Body1</item>
@@ -53,7 +53,9 @@
 
         <!--System/Platform attributes-->
         <item name="android:windowBackground">?android:colorBackground</item>
-<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
     </style>
 
 </resources>
