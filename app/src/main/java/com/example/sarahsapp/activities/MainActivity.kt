@@ -8,7 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.sarahsapp.R
 import com.example.sarahsapp.databinding.ActivityMainBinding
-import com.example.sarahsapp.fragments.GPUCalculatorFragment
 import com.example.sarahsapp.ui.utils.contentView
 import com.example.sarahsapp.ui.viewmodels.Student
 import com.google.android.material.bottomnavigation.BottomNavigationView
