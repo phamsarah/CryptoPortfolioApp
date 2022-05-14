@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.ScaleAnimation
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
@@ -52,7 +54,7 @@ class LoadingSpinnerFragment : Fragment() {
     }
 
     private fun animateMoneySarah(){
-        val rotate = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_animation)
-        splashScreenImage.animation = rotate
+        val pulseAnimation = AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
+        splashScreenImage.startAnimation(pulseAnimation)
     }
 }

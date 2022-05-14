@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var youTubePlayerView: YouTubePlayerView
 
-    private  lateinit var bottomActionBar: NavigationBarView
+    private  lateinit var bottomNavigationView: NavigationBarView
     private lateinit var bottomShadowBar: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +34,13 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.nav_host_fragment)
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById( R.id.nav_host_fragment) as NavHostFragment
-        val bottomNavigationView: BottomNavigationView = binding.bottomNavigation
+        bottomShadowBar = binding.shadowView
+        bottomNavigationView = binding.bottomNavigation
+        youTubePlayerView = binding.youtubePlayerView
 
+        initYouTubePlayerView()
+
+        val navHostFragment = supportFragmentManager.findFragmentById( R.id.nav_host_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
 
 
@@ -50,13 +54,6 @@ class MainActivity : AppCompatActivity() {
 
 //        val viewModel = getViewModel<MainViewModel>()
 //        viewModel.performAction()
-
-        bottomActionBar = binding.bottomNavigation
-        bottomShadowBar = binding.shadowView
-        youTubePlayerView = binding.youtubePlayerView
-
-        initYouTubePlayerView()
-
     }
 
     override fun onResume() {
